@@ -4,26 +4,19 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private bool landed;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        landed = false;
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        landed = true;
-    }
-
-    public void TakeOff()
-    {
-        landed = false;
-    }
-
-    public bool HasLanded()
-    {
-        return landed;
+        switch (collision.gameObject.tag) 
+        {
+            case "Friendly":
+                Debug.Log("This is a friendly object");
+                break;
+            case "Finish":
+                Debug.Log("Congrats you finish!");
+                break;
+            default:
+                Debug.Log("BOOM!");
+                break;
+        }
     }
 }

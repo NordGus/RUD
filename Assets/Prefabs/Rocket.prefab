@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1354240192810428959}
   - component: {fileID: 1071491723290716530}
   - component: {fileID: 1901369597}
-  - component: {fileID: 1901369591}
-  - component: {fileID: 1901369596}
+  - component: {fileID: 7426343671058812647}
+  - component: {fileID: 3176716921524240771}
+  - component: {fileID: 8257756544046777776}
   - component: {fileID: 1901369598}
-  - component: {fileID: 1901369599}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -116,7 +116,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!114 &1901369591
+--- !u!114 &7426343671058812647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,11 +125,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5240597994024121604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fea5a31ec8a5fc41bfe94be7bc8eecf, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1ce92b203d68c46b11916cef0b85c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustPower: 1000
---- !u!114 &1901369596
+  mainEngineThrustPower: 1000
+  rotationThrustPower: 500
+--- !u!114 &3176716921524240771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,10 +139,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5240597994024121604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f3ceb8fe8f0c04a90b8564e88d0ef4, type: 3}
+  m_Script: {fileID: 11500000, guid: 85a4fdcc72743d94daa8e05726dc0cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustPower: 500
+--- !u!114 &8257756544046777776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5240597994024121604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d5a895e05eb084dbf0d255c240ce9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &1901369598
 AudioSource:
   m_ObjectHideFlags: 0
@@ -238,15 +250,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1901369599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5240597994024121604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85a4fdcc72743d94daa8e05726dc0cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
