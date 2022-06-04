@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
@@ -15,8 +16,14 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("Congrats you finish!");
                 break;
             default:
-                Debug.Log("BOOM!");
+                ReloadScene();
                 break;
         }
+    }
+
+    private void ReloadScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }
