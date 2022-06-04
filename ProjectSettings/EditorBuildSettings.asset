@@ -7,5 +7,8 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Fly Over Demo.unity
+    guid: 9c3a5ed61cc17ed42a464df867be2529
+  - enabled: 1
+    path: Assets/Scenes/Controlled Flight.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
