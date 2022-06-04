@@ -8,12 +8,15 @@ public class Rotation : MonoBehaviour
     // Physics based inplementation.
     
     Rigidbody rigidbodyComponent;
-    [SerializeField] float thrustPower = 500f;
+    LandingSensor landingSensorComponent;
 
+    [SerializeField] float thrustPower = 500f;
+    
     // Start is called before the first frame update
     void Start()
     {
         rigidbodyComponent = GetComponent<Rigidbody>();
+        landingSensorComponent = GetComponent<LandingSensor>();
     }
 
     // Update is called once per frame
@@ -27,12 +30,12 @@ public class Rotation : MonoBehaviour
         {
             rigidbodyComponent.AddRelativeTorque(-CalculateThrustForce());
         }
-        else if (rigidbodyComponent.angularVelocity.z > 0)
+        else if (rigidbodyComponent.angularVelocity.z > 0 && !landingSensorComponent.HasLanded())
         {
             // Contraresting torque applyed to cancel excess rotation.
             rigidbodyComponent.AddRelativeTorque(-CalculateThrustForce());
         }
-        else if (rigidbodyComponent.angularVelocity.z < 0)
+        else if (rigidbodyComponent.angularVelocity.z < 0 && !landingSensorComponent.HasLanded())
         {
             // Contraresting torque applyed to cancel excess rotation.
             rigidbodyComponent.AddRelativeTorque(CalculateThrustForce());
