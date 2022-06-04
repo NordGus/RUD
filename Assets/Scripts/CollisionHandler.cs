@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LandingSensor : MonoBehaviour
+public class CollisionHandler : MonoBehaviour
 {
     private bool landed;
 
