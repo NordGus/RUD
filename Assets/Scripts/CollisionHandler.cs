@@ -43,6 +43,10 @@ public class CollisionHandler : MonoBehaviour
 
     private void StartFinishedSequence()
     {
+        // TODO: add crash SFX
+        // TODO: add crash particle effect
+        GetComponent<Movement>().enabled = false;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         Invoke("LoadNextLevel", nextLevelDelay);
     }
 
