@@ -5,16 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private Movement mvComponent;
-    private Rigidbody rbComponent;
+    [SerializeField] float crashDelay = 2f;
+    [SerializeField] float nextLevelDelay = 2f;
+    [SerializeField] AudioClip successAudioClip;
+    [SerializeField] AudioClip crashAudioClip;
 
-    [SerializeField] float crashDelay = 1f;
-    [SerializeField] float nextLevelDelay = 1f;
+    private Rigidbody rbComponent;
+    private Movement mvComponent;
+    private AudioSource asComponent;
+    private MainEngineHandler mehComponent;
+
+    private bool hasCrashed = false;
+    private bool hasFinished = false;
 
     void Start()
     {
-        mvComponent = GetComponent<Movement>();
         rbComponent = GetComponent<Rigidbody>();
+        mvComponent = GetComponent<Movement>();
+        asComponent = GetComponent<AudioSource>();
+        mehComponent = GetComponentInChildren<MainEngineHandler>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,19 +43,27 @@ public class CollisionHandler : MonoBehaviour
 
     private void StartCrashSequence()
     {
-        // TODO: add crash SFX
+        if (hasCrashed) return;
+
+        mehComponent.StopThrustSound();
+        asComponent.PlayOneShot(crashAudioClip);
         // TODO: add crash particle effect
-        GetComponent<Movement>().enabled = false;
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        Invoke("ReloadScene", crashDelay);
+        hasCrashed = true;
+        mvComponent.enabled = false;
+        rbComponent.constraints = RigidbodyConstraints.None;
+        if (!hasFinished) Invoke("ReloadScene", crashDelay);
     }
 
     private void StartFinishedSequence()
     {
-        // TODO: add crash SFX
+        if (hasCrashed || hasFinished) return;
+
+        mehComponent.StopThrustSound();
+        asComponent.PlayOneShot(successAudioClip);
         // TODO: add crash particle effect
-        GetComponent<Movement>().enabled = false;
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        hasFinished = true;
+        mvComponent.enabled = false;
+        rbComponent.constraints = RigidbodyConstraints.None;
         Invoke("LoadNextLevel", nextLevelDelay);
     }
 

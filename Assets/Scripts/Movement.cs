@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private Rigidbody rbComponent;
-    private AudioSource asComponent;
-    private LandingHandler lhComponent;
-
     [SerializeField] float mainEngineThrustPower = 1000f;
     [SerializeField] float rotationThrustPower = 500f;
+
+    private Rigidbody rbComponent;
+    private AudioSource asComponent;
+    private MainEngineHandler mehComponent;
+
+    private bool hasLanded = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rbComponent = GetComponent<Rigidbody>();
         asComponent = GetComponent<AudioSource>();
-        lhComponent = GetComponent<LandingHandler>();
+        mehComponent = GetComponentInChildren<MainEngineHandler>();
     }
 
     // Update is called once per frame
@@ -32,13 +34,13 @@ public class Movement : MonoBehaviour
         {
             rbComponent.AddRelativeForce(CalculateMainEngineThrustForce());
             
-            if (lhComponent.HasLanded()) lhComponent.TakeOff();
+            if (hasLanded) hasLanded = false;
             
-            if (!asComponent.isPlaying) asComponent.Play();
+            if (!mehComponent.IsPlaying()) mehComponent.PlayThrustAudio();
         }
-        else if (asComponent.isPlaying)
+        else if (mehComponent.IsPlaying())
         {
-            asComponent.Stop();
+            mehComponent.StopThrustSound();
         }
     }
 
@@ -59,12 +61,12 @@ public class Movement : MonoBehaviour
         {
             rbComponent.AddRelativeTorque(-CalculateRotationThurstForce());
         }
-        else if (rbComponent.angularVelocity.z > 0 && !lhComponent.HasLanded())
+        else if (rbComponent.angularVelocity.z > 0 && !hasLanded)
         {
             // Contraresting torque applyed to cancel excess rotation.
             rbComponent.AddRelativeTorque(-CalculateRotationThurstForce());
         }
-        else if (rbComponent.angularVelocity.z < 0 && !lhComponent.HasLanded())
+        else if (rbComponent.angularVelocity.z < 0 && !hasLanded)
         {
             // Contraresting torque applyed to cancel excess rotation.
             rbComponent.AddRelativeTorque(CalculateRotationThurstForce());
@@ -76,6 +78,12 @@ public class Movement : MonoBehaviour
         float force = rotationThrustPower * Time.deltaTime;
 
         return new Vector3(0, 0, force);
+    }
+
+    // Use to handle excess rotation cancellation.
+    private void OnCollisionEnter(Collision collision)
+    {
+        hasLanded = true;
     }
 }
 

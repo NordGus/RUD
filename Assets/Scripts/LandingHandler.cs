@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LandingHandler : MonoBehaviour
 {
-    private bool landed;
+    private bool landed = true;
 
     // Start is called before the first frame update
     void Start()
