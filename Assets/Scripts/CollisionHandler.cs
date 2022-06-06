@@ -9,6 +9,8 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] float nextLevelDelay = 2f;
     [SerializeField] AudioClip successAudioClip;
     [SerializeField] AudioClip crashAudioClip;
+    [SerializeField] AudioClip godModeActive;
+    [SerializeField] AudioClip godModeInactive;
     [SerializeField] ParticleSystem successParticles;
     [SerializeField] ParticleSystem crashParticles;
 
@@ -20,6 +22,8 @@ public class CollisionHandler : MonoBehaviour
     private bool hasCrashed = false;
     private bool hasFinished = false;
 
+    private bool godMode = false;
+
     void Start()
     {
         rbComponent = GetComponent<Rigidbody>();
@@ -28,8 +32,22 @@ public class CollisionHandler : MonoBehaviour
         mehComponent = GetComponentInChildren<MainEngineHandler>();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            ToggleGodMode();
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        if (godMode) return;
+
         switch (collision.gameObject.tag) 
         {
             case "Friendly":
@@ -88,5 +106,19 @@ public class CollisionHandler : MonoBehaviour
             nextSceneIndex = 0;
 
         SceneManager.LoadScene(nextSceneIndex);
+    }
+
+    private void ToggleGodMode()
+    {
+        godMode = !godMode;
+
+        if (godMode)
+        {
+            asComponent.PlayOneShot(godModeActive);
+        }
+        else
+        {
+            asComponent.PlayOneShot(godModeInactive);
+        }
     }
 }

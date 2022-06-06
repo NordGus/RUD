@@ -955,6 +955,8 @@ MonoBehaviour:
   nextLevelDelay: 2
   successAudioClip: {fileID: 8300000, guid: fbea7026d4c56d14eaad1f99c2026320, type: 3}
   crashAudioClip: {fileID: 8300000, guid: 26171425456d5cf4cb6e83b6f62f8cd3, type: 3}
+  godModeActive: {fileID: 8300000, guid: 83da6eb90c3df3c42a601ddb770bdeed, type: 3}
+  godModeInactive: {fileID: 8300000, guid: 460c19f0c8a5c61468d29a49512843ad, type: 3}
   successParticles: {fileID: 2554430801456676778}
   crashParticles: {fileID: 1576395296942385388}
 --- !u!82 &1901369598
