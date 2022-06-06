@@ -9,6 +9,8 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] float nextLevelDelay = 2f;
     [SerializeField] AudioClip successAudioClip;
     [SerializeField] AudioClip crashAudioClip;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem crashParticles;
 
     private Rigidbody rbComponent;
     private Movement mvComponent;
@@ -46,9 +48,11 @@ public class CollisionHandler : MonoBehaviour
         if (hasCrashed) return;
 
         mehComponent.StopThrustSound();
+        mehComponent.StopParticles();
         asComponent.PlayOneShot(crashAudioClip);
-        // TODO: add crash particle effect
+        crashParticles.Play();
         hasCrashed = true;
+        mvComponent.StopRotationParticles();
         mvComponent.enabled = false;
         rbComponent.constraints = RigidbodyConstraints.None;
         if (!hasFinished) Invoke("ReloadScene", crashDelay);
@@ -59,9 +63,11 @@ public class CollisionHandler : MonoBehaviour
         if (hasCrashed || hasFinished) return;
 
         mehComponent.StopThrustSound();
+        mehComponent.StopParticles();
         asComponent.PlayOneShot(successAudioClip);
-        // TODO: add crash particle effect
+        successParticles.Play();
         hasFinished = true;
+        mvComponent.StopRotationParticles();
         mvComponent.enabled = false;
         rbComponent.constraints = RigidbodyConstraints.None;
         Invoke("LoadNextLevel", nextLevelDelay);

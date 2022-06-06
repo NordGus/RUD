@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainEngineHandler : MonoBehaviour
 {
     private AudioSource asComponent;
+    [SerializeField] ParticleSystem engineJetParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +26,21 @@ public class MainEngineHandler : MonoBehaviour
     public bool IsPlaying()
     {
         return asComponent.isPlaying;
+    }
+
+    public void PlayParticles()
+    {
+        engineJetParticles.Play();
+    }
+
+    public void StopParticles()
+    {
+        engineJetParticles.Stop();
+        
+    }
+
+    public bool IsPlayingParticles()
+    {
+        return engineJetParticles.isPlaying;
     }
 }
