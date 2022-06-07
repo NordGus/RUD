@@ -22,7 +22,7 @@ public class CollisionHandler : MonoBehaviour
     private bool hasCrashed = false;
     private bool hasFinished = false;
 
-    private bool godMode = false;
+    private bool godMode;
 
     void Start()
     {
@@ -30,6 +30,8 @@ public class CollisionHandler : MonoBehaviour
         mvComponent = GetComponent<Movement>();
         asComponent = GetComponent<AudioSource>();
         mehComponent = GetComponentInChildren<MainEngineHandler>();
+
+        godMode = false;
     }
 
     void Update()
@@ -46,8 +48,6 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (godMode) return;
-
         switch (collision.gameObject.tag) 
         {
             case "Friendly":
@@ -64,6 +64,7 @@ public class CollisionHandler : MonoBehaviour
     private void StartCrashSequence()
     {
         if (hasCrashed) return;
+        if (godMode) return;
 
         mehComponent.StopThrustSound();
         mehComponent.StopParticles();
