@@ -78,12 +78,14 @@ public class Movement : MonoBehaviour
 
         if (!mehComponent.IsPlaying()) mehComponent.PlayThrustAudio();
         if (!mehComponent.IsPlayingParticles()) mehComponent.PlayParticles();
+        mehComponent.TurnLightOn();
     }
 
     private void StopThrust()
     {
         mehComponent.StopThrustSound();
         mehComponent.StopParticles();
+        mehComponent.TurnLightOff();
     }
 
     private void RotateLeft()
