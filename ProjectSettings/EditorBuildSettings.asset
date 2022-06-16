@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Fly Over Demo.unity
     guid: 9c3a5ed61cc17ed42a464df867be2529
   - enabled: 1
-    path: Assets/Scenes/Controlled Flight.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/Advanced Flight.unity
-    guid: a6e7ca699908eaa428ee4108d49c7c74
-  - enabled: 1
     path: Assets/Scenes/Fly Over Demo Damage.unity
     guid: de562e7ee8f451e4c8dc1600c44db73b
   - enabled: 1
+    path: Assets/Scenes/Controlled Flight.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: Assets/Scenes/Controlled Flight Damage.unity
     guid: c6063de311300054e88d135dc643199c
+  - enabled: 1
+    path: Assets/Scenes/Advanced Flight.unity
+    guid: a6e7ca699908eaa428ee4108d49c7c74
   - enabled: 1
     path: Assets/Scenes/Advanced Flight Damage.unity
     guid: 6794b3fa4054e8e43b7f7308d0e2c708
