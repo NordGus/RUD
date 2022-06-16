@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 5275e1d323f4b634aaac96c558c19eef, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 70ee0773a71c8304187b83e2e239f7f5, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementVector: {x: 0, y: 5, z: 0}
-  period: 2
+  period: 4
 --- !u!4 &419786400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 156257059056279455, guid: 8ce32f68557623c479dfd0832aaf630e, type: 3}
@@ -2042,6 +2042,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket
       objectReference: {fileID: 0}
+    - target: {fileID: 7426343671058812647, guid: daa20b71841418643851bb92b901a468, type: 3}
+      propertyPath: rotationThrustPower
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426343671058812647, guid: daa20b71841418643851bb92b901a468, type: 3}
+      propertyPath: mainEngineThrustPower
+      value: 600
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daa20b71841418643851bb92b901a468, type: 3}
 --- !u!1001 &1240688217
@@ -2895,7 +2903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementVector: {x: 0, y: -2, z: 0}
-  period: 2
+  period: 4
 --- !u!1 &2074324918
 GameObject:
   m_ObjectHideFlags: 0
