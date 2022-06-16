@@ -15,44 +15,17 @@ public class MainEngineHandler : MonoBehaviour
         plComponent = GetComponentInChildren<Light>();
     }
 
-    public void PlayThrustAudio()
+    public void StartEngine()
     {
-        asComponent.Play();
-    }
-
-    public void StopThrustSound()
-    {
-        asComponent.Stop();
-    }
-
-    public bool IsPlaying()
-    {
-        return asComponent.isPlaying;
-    }
-
-    public void PlayParticles()
-    {
-        engineJetParticles.Play();
-    }
-
-    public void StopParticles()
-    {
-        engineJetParticles.Stop();
-        
-    }
-
-    public bool IsPlayingParticles()
-    {
-        return engineJetParticles.isPlaying;
-    }
-
-    public void TurnLightOn()
-    {
+        if (!asComponent.isPlaying) asComponent.Play();
+        if (!engineJetParticles.isPlaying) engineJetParticles.Play();
         plComponent.enabled = true;
     }
 
-    public void TurnLightOff()
+    public void StopEngine()
     {
+        asComponent.Stop();
+        engineJetParticles.Stop();
         plComponent.enabled = false;
     }
 }

@@ -66,8 +66,7 @@ public class CollisionHandler : MonoBehaviour
         if (hasCrashed) return;
         if (godMode) return;
 
-        mehComponent.StopThrustSound();
-        mehComponent.StopParticles();
+        mehComponent.StopEngine();
         asComponent.PlayOneShot(crashAudioClip);
         crashParticles.Play();
         hasCrashed = true;
@@ -81,8 +80,7 @@ public class CollisionHandler : MonoBehaviour
     {
         if (hasCrashed || hasFinished) return;
 
-        mehComponent.StopThrustSound();
-        mehComponent.StopParticles();
+        mehComponent.StopEngine();
         asComponent.PlayOneShot(successAudioClip);
         successParticles.Play();
         hasFinished = true;

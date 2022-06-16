@@ -12,7 +12,6 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem bottomRigthThrusterParticles;
 
     private Rigidbody rbComponent;
-    private AudioSource asComponent;
     private MainEngineHandler mehComponent;
 
     private bool hasLanded = false;
@@ -21,7 +20,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rbComponent = GetComponent<Rigidbody>();
-        asComponent = GetComponent<AudioSource>();
         mehComponent = GetComponentInChildren<MainEngineHandler>();
     }
 
@@ -54,12 +52,28 @@ public class Movement : MonoBehaviour
         {
             RotateRight();
         }
-        else if (rbComponent.angularVelocity.z > 0 && !hasLanded)
+        else if (hasLanded)
+        {
+            StopRotationParticles();
+        }
+        else if (rbComponent.angularVelocity.z > 0 && rbComponent.angularVelocity.z < 1)
+        {
+            // Contraresting torque applyed to cancel excess left rotation, without particles.
+            StopRotationParticles();
+            RotateRight(false);
+        }
+        else if (rbComponent.angularVelocity.z > -1 && rbComponent.angularVelocity.z < 0)
+        {
+            // Contraresting torque applyed to cancel excess right rotation, without particles.
+            StopRotationParticles();
+            RotateLeft(false);
+        }
+        else if (rbComponent.angularVelocity.z > 0)
         {
             // Contraresting torque applyed to cancel excess left rotation.
             RotateRight();
         }
-        else if (rbComponent.angularVelocity.z < 0 && !hasLanded)
+        else if (rbComponent.angularVelocity.z < 0)
         {
             // Contraresting torque applyed to cancel excess right rotation.
             RotateLeft();
@@ -76,34 +90,36 @@ public class Movement : MonoBehaviour
 
         if (hasLanded) hasLanded = false;
 
-        if (!mehComponent.IsPlaying()) mehComponent.PlayThrustAudio();
-        if (!mehComponent.IsPlayingParticles()) mehComponent.PlayParticles();
-        mehComponent.TurnLightOn();
+        mehComponent.StartEngine();
     }
 
     private void StopThrust()
     {
-        mehComponent.StopThrustSound();
-        mehComponent.StopParticles();
-        mehComponent.TurnLightOff();
+        mehComponent.StopEngine();
     }
 
-    private void RotateLeft()
+    private void RotateLeft(bool withParticles = true)
     {
-        topLeftThrusterParticles.Stop();
-        if (!topRigthThrusterParticles.isPlaying) topRigthThrusterParticles.Play();
-        if (!bottomLeftThrusterParticles.isPlaying) bottomLeftThrusterParticles.Play();
-        bottomRigthThrusterParticles.Stop();
+        if (withParticles)
+        {
+            topLeftThrusterParticles.Stop();
+            if (!topRigthThrusterParticles.isPlaying) topRigthThrusterParticles.Play();
+            if (!bottomLeftThrusterParticles.isPlaying) bottomLeftThrusterParticles.Play();
+            bottomRigthThrusterParticles.Stop();
+        }
 
         rbComponent.AddRelativeTorque(CalculateRotationThurstForce());
     }
 
-    private void RotateRight()
+    private void RotateRight(bool withParticles = true)
     {
-        if (!topLeftThrusterParticles.isPlaying) topLeftThrusterParticles.Play();
-        topRigthThrusterParticles.Stop();
-        bottomLeftThrusterParticles.Stop();
-        if (!bottomRigthThrusterParticles.isPlaying) bottomRigthThrusterParticles.Play();
+        if (withParticles)
+        {
+            if (!topLeftThrusterParticles.isPlaying) topLeftThrusterParticles.Play();
+            topRigthThrusterParticles.Stop();
+            bottomLeftThrusterParticles.Stop();
+            if (!bottomRigthThrusterParticles.isPlaying) bottomRigthThrusterParticles.Play();
+        }
 
         rbComponent.AddRelativeTorque(-CalculateRotationThurstForce());
     }
